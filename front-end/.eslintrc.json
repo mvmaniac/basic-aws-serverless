@@ -12,6 +12,7 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module"
@@ -20,9 +21,27 @@
     "import",
     "prettier"
   ],
+  "settings": {
+    "import/resolver" : {
+      "alias" : {
+        "map": [
+          ["@","./src"]
+        ], 
+        "extensions": [".js"]
+      } 
+    }
+  },
   "rules": {
     "prettier/prettier": ["error"],
     "no-unused-vars": ["warn"],
-    "no-underscore-dangle": ["warn"]
+    "no-underscore-dangle": ["warn"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/webpack.*.js"
+        ]
+      }
+    ]
   }
 }

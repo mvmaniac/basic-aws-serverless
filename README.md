@@ -7,6 +7,8 @@
 ### 2. 차이점
 
 * EditorConfig 설정 추가
+* ESLint & Prettier 설정 추가
+* webpack 설정 추가
 
 ### 3. TODO
 
@@ -16,17 +18,38 @@
 
 #### 4-1. front-end
 
-* lite-server
+* webpack
 
     ``` javascript
-    npm i -D lite-server
+    npm i -D webpack webpack-cli webpack-dev-server
+    npm i -D webpack-merge
+    ```
+
+* webpack loader & plugin
+
+    ``` javascript
+    npm i -D babel-loader
+    npm i -D css-loader style-loader
+    npm i -D sass-loader node-sass
+    npm i -D url-loader file-loader
+    npm i -D clean-webpack-plugin mini-css-extract-plugin html-webpack-plugin
+    npm i -D optimize-css-assets-webpack-plugin terser-webpack-plugin
+    npm i -D copy-webpack-plugin
+    ```
+
+* babel & core-js
+
+    ``` javascript
+    npm i -D @babel/core @babel/preset-env
+    npm i -D babel-eslint
+    npm i -D core-js
     ```
 
 * eslint & prettier
 
     ``` javascript
     npm i -D eslint
-    npm i -D eslint-config-airbnb-base eslint-plugin-import
+    npm i -D eslint-config-airbnb-base eslint-plugin-import eslint-import-resolver-alias
     npm i -D prettier eslint-config-prettier eslint-plugin-prettier
     ```
 

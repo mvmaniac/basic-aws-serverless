@@ -1,5 +1,7 @@
 // API 객체
-import APIHandler from './api';
+import '@/css/style.scss';
+
+import APIHandler from '@/js/api';
 
 const API = new APIHandler();
 
@@ -93,7 +95,7 @@ const onChangeCard = (event) => {
   } else if (title.length > 0 && cardElement.id !== '') {
     updateCard(cardObj);
   } else {
-    card.remove(); // 입력된 내용이 없으면 카드 생성 취소
+    deleteCard(cardObj); // 입력된 내용이 없으면 카드 생성 취소
   }
 };
 
@@ -158,5 +160,6 @@ const getCards = async () => {
     draftEl.ondragover = (event) => event.preventDefault();
     draftEl.ondrop = cardOnDrop;
   });
+
   getCards();
 })();
