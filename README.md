@@ -55,6 +55,12 @@
 
 #### 4-2. lambda
 
+* aws-sdk & sharp
+
+    ``` javascript
+    npm i aws-sdk
+    ```
+
 * eslint & prettier
 
     ``` javascript

@@ -27,7 +27,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify('http://localhost:8081')
+      API_URL: JSON.stringify(
+        'https://j2bus311n1.execute-api.ap-northeast-2.amazonaws.com/dev'
+      )
     }),
 
     new MiniCssExtractPlugin({
@@ -35,6 +37,8 @@ module.exports = merge(common, {
     }),
 
     new HtmlWebpackPlugin({
+      favicon: './src/images/favicon.ico',
+      filename: 'index.html',
       template: './src/index.html',
       templateParameters: {
         MODE: ''

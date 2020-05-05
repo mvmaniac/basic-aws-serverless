@@ -9,6 +9,8 @@ module.exports = {
     }
   },
   entry: {
+    // 따로 js 파일로 나오는 방식으로 사용
+    'whatwg-fetch': 'whatwg-fetch',
     bundle: './src/index.js'
   },
   module: {

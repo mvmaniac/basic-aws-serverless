@@ -1,9 +1,9 @@
 // API 객체
 import '@/css/style.scss';
 
-import APIHandler from '@/js/api';
+import ApiHandler from '@/apis/ApiHandler';
 
-const API = new APIHandler();
+const API = new ApiHandler();
 
 // 카드 클래스
 class Card {

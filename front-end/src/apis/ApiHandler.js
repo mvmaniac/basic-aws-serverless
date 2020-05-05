@@ -1,5 +1,9 @@
-export default class APIHandler {
+import ApiRequest from './ApiRequest';
+import {fetching} from './fetch';
+
+export default class ApiHandler {
   constructor() {
+    console.log(`API_URL: ${API_URL}`);
     this.dummyData = [
       {
         id: 'dummy1',
@@ -15,8 +19,12 @@ export default class APIHandler {
   }
 
   // TODO: 전체 카드 객체 리스트 반환. 없으면 NULL
+  // eslint-disable-next-line class-methods-use-this
   async getCards() {
-    return this.dummyData ? this.dummyData : null;
+    const request = new ApiRequest('GET', '/kanban/cards');
+    const response = await fetching(request);
+
+    return response ?? null;
   }
 
   // TODO: 카드 객체 생성/추가 후 ID 반환
@@ -53,7 +61,4 @@ export default class APIHandler {
 
     console.log(this.dummyData);
   }
-
-  // TODO: API 요청 컨테이너. Method, Path, Body 속성
-  // TODO: API 호출 함수
 }

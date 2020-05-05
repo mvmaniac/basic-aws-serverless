@@ -21,10 +21,14 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify('')
+      API_URL: JSON.stringify(
+        'https://j2bus311n1.execute-api.ap-northeast-2.amazonaws.com/dev'
+      )
     }),
 
     new HtmlWebpackPlugin({
+      favicon: './src/images/favicon.ico',
+      filename: 'index.html',
       template: './src/index.html',
       templateParameters: {
         MODE: '(개발용)'

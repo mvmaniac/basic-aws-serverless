@@ -10,7 +10,8 @@
   ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "API_URL": "readonly"
   },
   "parser": "babel-eslint",
   "parserOptions": {
