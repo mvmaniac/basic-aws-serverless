@@ -18,47 +18,38 @@ export default class ApiHandler {
     ];
   }
 
-  // TODO: 전체 카드 객체 리스트 반환. 없으면 NULL
   // eslint-disable-next-line class-methods-use-this
   async getCards() {
     const request = new ApiRequest('GET', '/kanban/cards');
     const response = await fetching(request);
 
-    return response ?? null;
+    return response.Items ?? null;
   }
 
-  // TODO: 카드 객체 생성/추가 후 ID 반환
+  // eslint-disable-next-line class-methods-use-this
   async postCard(cardObj) {
-    const id = Math.round(Math.random() * 10000).toString();
-
-    this.dummyData.push({
-      id,
-      title: cardObj.title,
-      category: cardObj.category
+    const request = new ApiRequest('POST', '/kanban/cards', {
+      category: cardObj.category,
+      title: cardObj.title
     });
+    const response = await fetching(request);
 
-    console.log(this.dummyData);
-
-    return id;
+    return response.id ?? null;
   }
 
-  // TODO: ID로 카드 검색 후 내용,카테고리 수정
+  // eslint-disable-next-line class-methods-use-this
   async putCard(cardObj) {
-    this.dummyData = this.dummyData.map((card) => {
-      return card.id === cardObj.id
-        ? {...card, title: cardObj.title, category: cardObj.category}
-        : card;
+    const request = new ApiRequest('PUT', `/kanban/cards/${cardObj.id}`, {
+      category: cardObj.category,
+      title: cardObj.title
     });
 
-    console.log(this.dummyData);
+    await fetching(request);
   }
 
-  // TODO: ID로 카드 검색 후 삭제
+  // eslint-disable-next-line class-methods-use-this
   async deleteCard(id) {
-    this.dummyData = this.dummyData.filter((card) => {
-      return card.id !== id;
-    });
-
-    console.log(this.dummyData);
+    const request = new ApiRequest('DELETE', `/kanban/cards/${id}`);
+    await fetching(request);
   }
 }

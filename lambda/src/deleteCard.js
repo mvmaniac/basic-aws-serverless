@@ -12,7 +12,7 @@ exports.handler = async (event, context, callback) => {
   console.log(`Received callback: ${JSON.stringify(callback, null, 2)}`);
 
   let response = {
-    statusCode: 200,
+    statusCode: 204,
     headers: {
       'Access-Control-Allow-Origin': '*'
     }
