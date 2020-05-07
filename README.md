@@ -55,10 +55,16 @@
 
 #### 4-2. lambda
 
-* aws-sdk & sharp
+* aws-sdk
 
     ``` javascript
     npm i aws-sdk
+    ```
+
+* aws-xray-sdk (xray를 Lambda Layer에 올려서 사용함, [계층 내 라이브러리 종속 항목들을 포함](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-layers.html) 부분 확인)
+
+    ``` javascript
+    npm i aws-xray-sdk
     ```
 
 * eslint & prettier
