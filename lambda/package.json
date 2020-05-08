@@ -8,7 +8,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.671.0",
+    "aws-sdk": "^2.672.0",
     "aws-xray-sdk": "^3.0.1"
   },
   "devDependencies": {

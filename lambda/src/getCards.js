@@ -1,4 +1,5 @@
-const AWS = require('aws-sdk');
+const AWSXRay = require('aws-xray-sdk');
+const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
   apiVersion: '2012-08-10'
@@ -7,6 +8,11 @@ const documentClient = new AWS.DynamoDB.DocumentClient({
 const TABLE_NAME = 'Cards';
 
 exports.handler = async (event, context, callback) => {
+  const segment = AWSXRay.getSegment();
+  const subsegment = segment.addNewSubsegment('kanban-lambda');
+
+  subsegment.addAnnotation('App', 'kanban-lambda-getCards');
+
   console.log(`Received event: ${JSON.stringify(event, null, 2)}`);
   console.log(`Received context: ${JSON.stringify(context, null, 2)}`);
   console.log(`Received callback: ${JSON.stringify(callback, null, 2)}`);
@@ -18,10 +24,13 @@ exports.handler = async (event, context, callback) => {
     }
   };
 
+  let params = {};
+
   try {
-    const params = {
+    params = {
       TableName: TABLE_NAME
     };
+
     const cards = await documentClient.scan(params).promise();
 
     // statusCode, body 속성은 API Gateway 응답 본문 형식으로 맞춰야 함
@@ -37,9 +46,15 @@ exports.handler = async (event, context, callback) => {
     response = {
       ...response,
       statusCode: 500,
-      body: JSON.stringify({message: error})
+      body: JSON.stringify({message: '서버 에러'})
     };
+
+    subsegment.addMetadata('Exception', error.stack.toString());
+    subsegment.addMetadata('Event', event);
+    subsegment.addMetadata('DB Params', params);
+    subsegment.close(error);
   }
 
+  subsegment.close();
   return response;
 };
