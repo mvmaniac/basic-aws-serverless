@@ -61,7 +61,7 @@
     npm i aws-sdk
     ```
 
-* aws-xray-sdk (xray를 Lambda Layer에 올려서 사용함, [계층 내 라이브러리 종속 항목들을 포함](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-layers.html) 부분 확인)
+* aws-xray-sdk
 
     ``` javascript
     npm i aws-xray-sdk
@@ -74,3 +74,37 @@
     npm i -D eslint-config-airbnb-base eslint-plugin-import
     npm i -D prettier eslint-config-prettier eslint-plugin-prettier
     ```
+
+### 5. etc
+
+* lambda
+  각 폴더 별로 package.json이 있는 이유는 nodejs 기반으로 SAM 으로 올릴 경우 반드시 필요함, 없으면 빌드가 실패됨
+
+* aws-xray-sdk  
+  xray를 Lambda Layer에 올려서 사용함, [계층 내 라이브러리 종속 항목들을 포함](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-layers.html) 부분 확인
+
+  직접 파일 업로드를 해서 올릴경우 nodejs 폴더 아래에 node_modules 폴더가 있어야 함 (다시 말하자면 npm install이 필요함)  
+  일단 최종 마지막 작업은 SAM을 통한 layer 생성 이기 때문에 삭제함
+
+* aws-sam-cli
+  build 명령어 실행 시 임의로 만들어지는 .tgz 파일이 temp 디렉터리 쪽으로 안풀림  
+  아래 파일 경로를 직접 수정해서 실행 시킴 (환경적 요인이 있는듯...)
+
+  ```console
+  [설치경로]\runtime\Lib\site-packages\aws_lambda_builders\workflows\nodejs_npm\actions.py
+  ```
+
+  위 파일에서 NodejsNpmPackAction 클래스 execute 함수 부분을 수정함  
+  .tgz 파일이 프로젝트 루트에 생성되어서 프로젝트 루트에 있는 .tgz 파일 경로를 바라보게 함
+
+  ```python
+  project_path = self.osutils.dirname((self.osutils.dirname(self.osutils.dirname(self.manifest_path)))) # 이 부분 추가
+
+  ...(생략)
+
+  tarfile_path = self.osutils.joinpath(project_path, tarfile_name) # project_path를 바라보게 수정
+
+  ...(생략)
+
+  self.osutils.extract_tarfile(tarfile_path, self.artifacts_dir)
+  ```

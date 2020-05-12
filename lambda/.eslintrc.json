@@ -23,6 +23,8 @@
   "rules": {
     "prettier/prettier": ["error"],
     "no-unused-vars": ["warn"],
-    "no-underscore-dangle": ["warn"]
+    "no-underscore-dangle": ["warn"],
+    
+    "import/no-extraneous-dependencies": ["warn"]
   }
 }
