@@ -77,14 +77,28 @@
 
 ### 5. etc
 
-* lambda
+* front-end  
+  aws cli 를 통해서 배포 할 수 있음  
+  이미 만들어진 S3에 업데이트인 경우로 npm build 후 배포 할 것
+  
+  버킷 나열
+
+  ```cmd
+  aws s3 ls
+  ```
+
+  버킷 업데이트
+
+  ```cmd
+  aws s3 sync ./dist s3://[버킷이름]
+  ```
+
+* lambda  
   각 폴더 별로 package.json이 있는 이유는 nodejs 기반으로 SAM 으로 올릴 경우 반드시 필요함, 없으면 빌드가 실패됨
 
 * aws-xray-sdk  
-  xray를 Lambda Layer에 올려서 사용함, [계층 내 라이브러리 종속 항목들을 포함](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-layers.html) 부분 확인
-
+  xray를 Lambda Layer에 올려서 사용함, [계층 내 라이브러리 종속 항목들을 포함](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/configuration-layers.html) 부분 확인  
   직접 파일 업로드를 해서 올릴경우 nodejs 폴더 아래에 node_modules 폴더가 있어야 함 (다시 말하자면 npm install이 필요함)  
-  일단 최종 마지막 작업은 SAM을 통한 layer 생성 이기 때문에 삭제함
 
 * aws-sam-cli
   build 명령어 실행 시 임의로 만들어지는 .tgz 파일이 temp 디렉터리 쪽으로 안풀림  

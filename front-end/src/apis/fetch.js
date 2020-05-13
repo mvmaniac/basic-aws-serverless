@@ -7,7 +7,7 @@ export const fetching = async (request) => {
       mode: 'cors',
       cache: 'no-cache',
       headers: {
-        'x-api-key': 'd5G02nIFVaa9pXCs4t0oD1qxJzSbohXOaUfknYce',
+        'x-api-key': 'RT1A2Xq1V77d9N0TkeXcu7GmtzqOL9Zh8AjCEJE8',
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },

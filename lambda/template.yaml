@@ -7,6 +7,8 @@ Description: >
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
+  Api:
+    OpenApiVersion: 3.0.1
   Function:
     Timeout: 3
     Handler: app.handler
@@ -20,8 +22,28 @@ Resources:
     Properties:
       Name: kanban-api
       StageName: dev
+      EndpointConfiguration: REGIONAL
       TracingEnabled: true
-
+      MethodSettings: 
+        - HttpMethod: "*"
+          LoggingLevel: INFO
+          ResourcePath: "/*"
+      Cors:
+        AllowMethods: "'*'"
+        AllowHeaders: "'*'"
+        AllowOrigin: "'*'"
+      Auth:
+        UsagePlan:
+          UsagePlanName: kanban-usage-plan
+          CreateUsagePlan: PER_API
+          Description: Usage plan for this API
+          Quota:
+            Limit: 500
+            Period: DAY
+          Throttle:
+            BurstLimit: 10
+            RateLimit: 10
+    
   XRayLayer:
     Type: AWS::Serverless::LayerVersion
     Properties:
@@ -49,6 +71,57 @@ Resources:
               ApiKeyRequired: true
             RestApiId: !Ref APIGateway
 
+  PostCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/postCard
+      Role: arn:aws:iam::000140339722:role/Lambda-Kanban-Role
+      FunctionName: kanban-postCard
+      Description: kanban-postCard lambda
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards
+            Method: post
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+  PutCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/putCard
+      Role: arn:aws:iam::000140339722:role/Lambda-Kanban-Role
+      FunctionName: kanban-putCard
+      Description: kanban-putCard lambda
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: put
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+
+  DeleteCardsFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: src/deleteCard
+      Role: arn:aws:iam::000140339722:role/Lambda-Kanban-Role
+      FunctionName: kanban-deleteCard
+      Description: kanban-deleteCard lambda
+      Events:
+        Trigger:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /kanban/cards/{id}
+            Method: delete
+            Auth:
+              ApiKeyRequired: true
+            RestApiId: !Ref APIGateway
+            
   DynamoDB:
     Type: AWS::Serverless::SimpleTable
     Properties:
@@ -64,3 +137,6 @@ Outputs:
   APIGateway:
     Description: "API Gateway endpoint URL for Prod stage for Kanban project"
     Value: !Sub "https://${APIGateway}.execute-api.${AWS::Region}.amazonaws.com/dev"
+  APIKey:
+    Description: "API Key ID"
+    Value: !Ref APIGatewayApiKey

@@ -22,7 +22,7 @@ module.exports = merge(common, {
   plugins: [
     new webpack.DefinePlugin({
       API_URL: JSON.stringify(
-        'https://j2bus311n1.execute-api.ap-northeast-2.amazonaws.com/dev'
+        'https://56a0cbdhxd.execute-api.ap-northeast-2.amazonaws.com/dev'
       )
     }),
 
