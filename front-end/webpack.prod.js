@@ -3,9 +3,10 @@ const {merge} = require('webpack-merge');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const OptimizeCSSAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const TerserWebpackPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const TerserWebpackPlugin = require(`terser-webpack-plugin`);
 
 const common = require('./webpack.common');
 
@@ -51,14 +52,14 @@ module.exports = merge(common, {
   ],
   optimization: {
     minimizer: [
-      new OptimizeCSSAssetsWebpackPlugin(),
       new TerserWebpackPlugin({
         terserOptions: {
           compress: {
             drop_console: true
           }
         }
-      })
+      }),
+      new CssMinimizerPlugin()
     ]
   }
 });

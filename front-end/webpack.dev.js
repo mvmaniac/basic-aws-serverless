@@ -1,5 +1,3 @@
-const childProcess = require('child_process');
-
 const webpack = require('webpack');
 const {merge} = require('webpack-merge');
 
@@ -36,6 +34,7 @@ module.exports = merge(common, {
     })
   ],
   devServer: {
+    publicPath: '/',
     port: 9000,
     hot: true
   }

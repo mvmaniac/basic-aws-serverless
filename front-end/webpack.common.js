@@ -18,16 +18,15 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              publicPath: '',
-              name: '[name].[ext]?[hash]',
-              limit: 10000 // 10KB
-            }
+        type: 'asset',
+        generator: {
+          filename: '[name][ext]?[hash]'
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10 * 1024 // 10KB
           }
-        ]
+        }
       },
       {
         test: /\.js$/,
@@ -58,6 +57,7 @@ module.exports = {
   },
   plugins: [new CleanWebpackPlugin()],
   output: {
+    publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js'
   }
