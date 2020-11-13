@@ -4,10 +4,7 @@
     "node": true,
     "es2021": true
   },
-  "extends": [
-    "airbnb-base",
-    "plugin:prettier/recommended"
-  ],
+  "extends": ["airbnb-base", "prettier"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly",
@@ -18,30 +15,22 @@
     "ecmaVersion": 2021,
     "sourceType": "module"
   },
-  "plugins": [
-    "import",
-    "prettier"
-  ],
+  "plugins": ["import"],
   "settings": {
-    "import/resolver" : {
-      "alias" : {
-        "map": [
-          ["@","./src"]
-        ], 
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./src"]],
         "extensions": [".js"]
-      } 
+      }
     }
   },
   "rules": {
-    "prettier/prettier": ["error"],
     "no-unused-vars": ["warn"],
     "no-underscore-dangle": ["warn"],
     "import/no-extraneous-dependencies": [
       "error",
       {
-        "devDependencies": [
-          "**/webpack.*.js"
-        ]
+        "devDependencies": ["**/webpack.*.js"]
       }
     ]
   }
