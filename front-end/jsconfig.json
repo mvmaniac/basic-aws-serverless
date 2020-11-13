@@ -2,17 +2,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
+      "~/*": ["./*"],
+      "@/*": ["./src/*"]
     }
   },
-  "exclude": [
-    ".history",
-    "node_modules",
-    "dist"
-  ]
+  "exclude": [".history", "node_modules", "dist"]
 }

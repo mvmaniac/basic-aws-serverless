@@ -70,16 +70,16 @@ nav {
   font-size: 1.5em;
   font-weight: bold;
   border-radius: 10px;
-  [data-card-category*="todo"] & {
+  [data-card-category*='todo'] & {
     background-color: $color-blue;
   }
-  [data-card-category*="ongoing"] & {
+  [data-card-category*='ongoing'] & {
     background-color: $color-yellow;
   }
-  [data-card-category*="test"] & {
+  [data-card-category*='test'] & {
     background-color: $color-orange;
   }
-  [data-card-category*="done"] & {
+  [data-card-category*='done'] & {
     background-color: $color-green;
   }
 }
