@@ -1,5 +1,7 @@
 const path = require('path');
+
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'none',
@@ -55,7 +57,12 @@ module.exports = {
       }
     ]
   },
-  plugins: [new CleanWebpackPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new ESLintPlugin({
+      extensions: ['.js']
+    })
+  ],
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
