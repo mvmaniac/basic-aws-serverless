@@ -36,9 +36,7 @@ const deleteCard = (event) => {
 };
 
 // 전체 카드 카테고리 요소 반환
-const getCardContainers = () => {
-  return document.querySelectorAll('.card-container');
-};
+const getCardContainers = () => document.querySelectorAll('.card-container');
 
 // 카드 요소에서 카드 객체 반환
 const getCardInfo = (cardElement) =>
