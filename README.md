@@ -40,7 +40,6 @@
 
   ```javascript
   npm i -D @babel/core @babel/preset-env
-  npm i -D babel-eslint
   npm i -D core-js
   ```
 
