@@ -8,14 +8,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.843.0",
-    "aws-xray-sdk": "^3.2.0"
+    "aws-sdk": "^2.927.0",
+    "aws-xray-sdk": "^3.3.3"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
+    "eslint": "^7.28.0",
     "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "prettier": "^2.2.1"
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.4",
+    "prettier": "^2.3.1"
   }
 }
