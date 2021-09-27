@@ -34,8 +34,10 @@ module.exports = merge(common, {
     })
   ],
   devServer: {
-    publicPath: '/',
     port: 9000,
-    hot: true
+    hot: true,
+    devMiddleware: {
+      publicPath: '/'
+    }
   }
 });
