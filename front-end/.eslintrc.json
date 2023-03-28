@@ -11,7 +11,7 @@
     "API_URL": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2022,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["import"],
