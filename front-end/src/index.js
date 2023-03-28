@@ -49,9 +49,8 @@ const getCardInfo = (cardElement) =>
 
 // 카드 드래그 앤 드랍 시작 이벤트. 카테고리 이름 & 카드 ID 저장. 이동가능 영역 표시
 const ondragstart = (event) => {
-  const currentColumnType = event.target.parentNode.parentNode.getAttribute(
-    'data-card-category'
-  );
+  const currentColumnType =
+    event.target.parentNode.parentNode.getAttribute('data-card-category');
   getCardContainers().forEach((element) => {
     if (
       element.parentNode.getAttribute('data-card-category') !==
@@ -77,7 +76,7 @@ const cardOnDrop = (event) => {
 };
 
 // 카드 드래그 앤 드랍 종료 이벤트. 이동가능 영역 표시 CSS class 제거
-const ondragend = (event) => {
+const ondragend = () => {
   getCardContainers().forEach((element) => {
     element.classList.remove('hoverable');
   });

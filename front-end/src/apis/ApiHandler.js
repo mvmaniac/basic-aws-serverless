@@ -1,5 +1,5 @@
 import ApiRequest from './ApiRequest';
-import {fetching} from './fetch';
+import { fetching } from './fetch';
 
 export default class ApiHandler {
   constructor() {
