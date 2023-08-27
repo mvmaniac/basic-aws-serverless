@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -19,22 +19,22 @@ module.exports = merge(common, {
         test: /\.(scss|css)$/,
         exclude: /node_modules/,
         use: [
-          {loader: MiniCssExtractPlugin.loader},
+          { loader: MiniCssExtractPlugin.loader },
           'css-loader',
-          'sass-loader'
-        ]
-      }
-    ]
+          'sass-loader',
+        ],
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
       API_URL: JSON.stringify(
-        'https://56a0cbdhxd.execute-api.ap-northeast-2.amazonaws.com/dev'
-      )
+        'https://56a0cbdhxd.execute-api.ap-northeast-2.amazonaws.com/dev',
+      ),
     }),
 
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: '[name].css',
     }),
 
     new HtmlWebpackPlugin({
@@ -42,24 +42,24 @@ module.exports = merge(common, {
       filename: 'index.html',
       template: './src/index.html',
       templateParameters: {
-        MODE: ''
+        MODE: '',
       },
       minify: {
         collapseWhitespace: true,
-        removeComments: true
-      }
-    })
+        removeComments: true,
+      },
+    }),
   ],
   optimization: {
     minimizer: [
       new TerserWebpackPlugin({
         terserOptions: {
           compress: {
-            drop_console: true
-          }
-        }
+            drop_console: true,
+          },
+        },
       }),
-      new CssMinimizerPlugin()
-    ]
-  }
+      new CssMinimizerPlugin(),
+    ],
+  },
 });

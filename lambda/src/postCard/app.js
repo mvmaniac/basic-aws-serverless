@@ -2,7 +2,7 @@ const AWSXRay = require('aws-xray-sdk');
 const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
-  apiVersion: '2012-08-10'
+  apiVersion: '2012-08-10',
 });
 
 const TABLE_NAME = 'Cards';
@@ -20,8 +20,8 @@ exports.handler = async (event, context, callback) => {
   let response = {
     statusCode: 201,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   };
 
   let params = {};
@@ -39,15 +39,15 @@ exports.handler = async (event, context, callback) => {
         // HashKey 이름을 id로 지정함
         id,
         category: body.category,
-        title: body.title
-      }
+        title: body.title,
+      },
     };
 
     await documentClient.put(params).promise();
 
     response = {
       ...response,
-      body: JSON.stringify({id})
+      body: JSON.stringify({id}),
     };
   } catch (error) {
     console.error(error);
@@ -55,7 +55,7 @@ exports.handler = async (event, context, callback) => {
     response = {
       ...response,
       statusCode: 500,
-      body: JSON.stringify({message: error})
+      body: JSON.stringify({message: error}),
     };
 
     subsegment.addMetadata('Exception', error.stack.toString());

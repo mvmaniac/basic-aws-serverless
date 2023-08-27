@@ -2,7 +2,7 @@ const AWSXRay = require('aws-xray-sdk');
 const AWS = AWSXRay.captureAWS(require('aws-sdk'));
 
 const documentClient = new AWS.DynamoDB.DocumentClient({
-  apiVersion: '2012-08-10'
+  apiVersion: '2012-08-10',
 });
 
 const TABLE_NAME = 'Cards';
@@ -20,15 +20,15 @@ exports.handler = async (event, context, callback) => {
   let response = {
     statusCode: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
+      'Access-Control-Allow-Origin': '*',
+    },
   };
 
   let params = {};
 
   try {
     params = {
-      TableName: TABLE_NAME
+      TableName: TABLE_NAME,
     };
 
     const cards = await documentClient.scan(params).promise();
@@ -38,7 +38,7 @@ exports.handler = async (event, context, callback) => {
     // 안그러면 API Gateway 에서 맵핑 같은 설정작업이 필요함 (어떤 데이터를 내려줄것인지 등)
     response = {
       ...response,
-      body: JSON.stringify(cards)
+      body: JSON.stringify(cards),
     };
   } catch (error) {
     console.error(error);
@@ -46,7 +46,7 @@ exports.handler = async (event, context, callback) => {
     response = {
       ...response,
       statusCode: 500,
-      body: JSON.stringify({message: '서버 에러'})
+      body: JSON.stringify({message: '서버 에러'}),
     };
 
     subsegment.addMetadata('Exception', error.stack.toString());

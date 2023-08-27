@@ -44,7 +44,7 @@ const getCardInfo = (cardElement) =>
     cardElement,
     cardElement.children[1].value,
     cardElement.id.replace('card-id-', ''),
-    cardElement.parentNode.parentNode.getAttribute('data-card-category')
+    cardElement.parentNode.parentNode.getAttribute('data-card-category'),
   );
 
 // 카드 드래그 앤 드랍 시작 이벤트. 카테고리 이름 & 카드 ID 저장. 이동가능 영역 표시

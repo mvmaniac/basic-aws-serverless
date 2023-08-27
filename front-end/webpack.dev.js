@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -13,15 +13,15 @@ module.exports = merge(common, {
       {
         test: /\.(scss|css)$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
       API_URL: JSON.stringify(
-        'https://56a0cbdhxd.execute-api.ap-northeast-2.amazonaws.com/dev'
-      )
+        'https://56a0cbdhxd.execute-api.ap-northeast-2.amazonaws.com/dev',
+      ),
     }),
 
     new HtmlWebpackPlugin({
@@ -29,15 +29,15 @@ module.exports = merge(common, {
       filename: 'index.html',
       template: './src/index.html',
       templateParameters: {
-        MODE: '(개발용)'
-      }
-    })
+        MODE: '(개발용)',
+      },
+    }),
   ],
   devServer: {
     port: 9000,
     hot: true,
     devMiddleware: {
-      publicPath: '/'
-    }
-  }
+      publicPath: '/',
+    },
+  },
 });

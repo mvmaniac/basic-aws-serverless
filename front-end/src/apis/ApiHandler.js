@@ -8,13 +8,13 @@ export default class ApiHandler {
       {
         id: 'dummy1',
         title: '더미 데이터 1',
-        category: 'ongoing'
+        category: 'ongoing',
       },
       {
         id: 'dummy2',
         title: '더미 데이터 2',
-        category: 'done'
-      }
+        category: 'done',
+      },
     ];
   }
 
@@ -30,7 +30,7 @@ export default class ApiHandler {
   async postCard(cardObj) {
     const request = new ApiRequest('POST', '/kanban/cards', {
       category: cardObj.category,
-      title: cardObj.title
+      title: cardObj.title,
     });
     const response = await fetching(request);
 
@@ -41,7 +41,7 @@ export default class ApiHandler {
   async putCard(cardObj) {
     const request = new ApiRequest('PUT', `/kanban/cards/${cardObj.id}`, {
       category: cardObj.category,
-      title: cardObj.title
+      title: cardObj.title,
     });
 
     await fetching(request);

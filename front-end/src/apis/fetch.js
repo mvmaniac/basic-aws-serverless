@@ -9,9 +9,9 @@ export const fetching = async (request) => {
       headers: {
         'x-api-key': 'RT1A2Xq1V77d9N0TkeXcu7GmtzqOL9Zh8AjCEJE8',
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
       },
-      body: request.body ? JSON.stringify(request.body) : null
+      body: request.body ? JSON.stringify(request.body) : null,
     });
 
     console.log('response: %o', response);

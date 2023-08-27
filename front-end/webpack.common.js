@@ -1,19 +1,19 @@
 const path = require('path');
 
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
   mode: 'none',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src/')
-    }
+      '@': path.resolve(__dirname, './src/'),
+    },
   },
   entry: {
     // 따로 js 파일로 나오는 방식으로 사용
     'whatwg-fetch': 'whatwg-fetch',
-    bundle: './src/index.js'
+    bundle: './src/index.js',
   },
   module: {
     rules: [
@@ -22,13 +22,13 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset',
         generator: {
-          filename: '[name][ext]?[hash]'
+          filename: '[name][ext]?[hash]',
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 10 * 1024 // 10KB
-          }
-        }
+            maxSize: 10 * 1024, // 10KB
+          },
+        },
       },
       {
         test: /\.js$/,
@@ -43,29 +43,29 @@ module.exports = {
                   {
                     targets: {
                       // https://github.com/browserslist/browserslist 참고
-                      browsers: ['defaults']
+                      browsers: ['defaults'],
                     },
                     useBuiltIns: 'usage',
-                    corejs: {version: 3, proposals: true}
-                  }
-                ]
+                    corejs: { version: 3, proposals: true },
+                  },
+                ],
               ],
-              plugins: []
-            }
-          }
-        ]
-      }
-    ]
+              plugins: [],
+            },
+          },
+        ],
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new ESLintPlugin({
-      extensions: ['.js']
-    })
+      extensions: ['.js'],
+    }),
   ],
   output: {
     publicPath: '/',
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].js'
-  }
+    filename: '[name].js',
+  },
 };
